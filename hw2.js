@@ -186,8 +186,8 @@ function fractalize(ctx, ratio, iterations, toggleF, prevX, prevY, endX, endY) {
                                In a while loop, calls the lower-level function and gives it each start and endpoint calculated along with the ratio.
     */
 
-    var changeX = (endX - prevX) * ratio;
-    var changeY = (endY - prevY) * ratio;
+    var changeX = (endX - prevX) * (1 / ratio);
+    var changeY = (endY - prevY) * (1 / ratio);
     var radians = Math.atan2(changeY, changeX);
     console.log(radians * (180/Math.PI));
     console.log(radians);
@@ -208,8 +208,8 @@ function fractalize(ctx, ratio, iterations, toggleF, prevX, prevY, endX, endY) {
     //Get length of the hypotenuse
     var strLen = parseInt(Math.sqrt(Math.pow(changeX, 2) + Math.pow(changeY, 2)));
     //x = prevX + line-length * cosine of angle in radians
-    var numOfLines = Math.pow(ratio, -1) * 2;
-    var numOfEllipses = Math.pow(ratio, -1);
+    var numOfLines = ratio * 2;
+    var numOfEllipses = ratio;
     var newX, newY;
     if(toggleF == 0) {
         //This sets up a fractal line
@@ -266,7 +266,7 @@ function fractalize(ctx, ratio, iterations, toggleF, prevX, prevY, endX, endY) {
         var radius = parseInt(Math.sqrt(Math.pow(centerX - prevX, 2) + Math.pow(centerY - prevY, 2)));
         var startAngle = Math.atan2(prevY - centerY, prevX - centerX);
         var endAngle = Math.atan2(endY - centerY, endX - centerX);
-        var endAngleIteration = (endAngle - startAngle) * ratio;
+        var endAngleIteration = (endAngle - startAngle) * (1/ratio);
         var endIncrease = 1;
         
         ctx.moveTo(startX, startY);
